@@ -7,6 +7,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using _5_Lab1.Models;
 
+using Microsoft.AspNetCore.Http;
+
+
 namespace _5_Lab1
 {
     public class Startup
@@ -41,6 +44,11 @@ namespace _5_Lab1
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.SendFileAsync("./index.html");
+                });
             });
         }
     }
